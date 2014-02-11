@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	
+	RewriteRule ^registrar/?$ \public_html/registrar_usuario.php [NC,L]
+	RewriteRule ^login/?$ \public_html/login.php [NC,L]
+</IfModule>	
