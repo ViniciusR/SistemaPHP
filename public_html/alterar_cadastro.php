@@ -7,15 +7,26 @@ include_once '../config.php';
 header('Content-Type: text/html; charset=ISO-8859-1');
 //include ROOT.'/public_html/header.php';
 require_once ROOT.'/controller/UsuariosController.php';
+session_start();
 
+	if (!isset($_SESSION['logado']) || !$_SESSION['logado'])
+	{
+		header('Location: ..\login');
+	}
 
-	session_start();
-	$usuarioModel;
-	$usuarioController;
 	
-	if (isset($_GET['id']))
+$usuarioModel;
+$usuarioController;
+	
+	if (isset($_GET['id']) && isset($_SESSION['id']))
 	{
 		$usuarioModel = new UsuarioModel();
+		
+		if ($_GET['id'] != $_SESSION['id'])
+		{
+			header('Location: area_usuario.php?id='.$_GET['id']);
+		}
+		
 		$usuarioModel->getUsuario($_GET['id']);
 		$usuarioController = new UsuariosController($usuarioModel);
 		

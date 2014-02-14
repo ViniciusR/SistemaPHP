@@ -74,6 +74,7 @@ $(document).ready(function(){
                 },
                 confirmar_senha_registrar: {
                     required: true,
+                    alphanumeric: true,
                     minlength: 6,
                     equalTo: "#senha_registrar"
                 },

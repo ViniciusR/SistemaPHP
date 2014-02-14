@@ -5,7 +5,6 @@ include_once '../config.php';
 * mas o PHP nao.
 */
 header('Content-Type: text/html; charset=ISO-8859-1');
-//include ROOT.'/public_html/header.php';
 session_start();
 require_once ROOT.'/controller/UsuariosController.php';
 
@@ -57,6 +56,11 @@ $usuarioController = new UsuariosController(new UsuarioModel());
 					</div>
 					
 					<div class="input-group">
+						<label for="telefone_registrar">Telefone</label>
+						<input id="telefone_registrar" name="telefone_registrar" type="text">
+					</div>
+					
+					<div class="input-group">
 						<label for="email_registrar">E-mail</label>
 						<input id="email_registrar" name="email_registrar" type="text">
 					</div>
@@ -103,6 +107,7 @@ $usuarioController = new UsuariosController(new UsuarioModel());
 	 	//S: apenas letras.
 	 	//mask('0#', {maxlength: false});: sem mascara, mas permite apenas numeros.
  		$('#data_nasc_registrar').mask('00/00/0000'); 
+ 		$('#telefone_registrar').mask('(00) 0000-0000');
  		$('#cpf_registrar').mask('000.000.000-00');
  		});
 	</script>
