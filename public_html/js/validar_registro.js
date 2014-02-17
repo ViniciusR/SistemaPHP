@@ -3,6 +3,38 @@ jQuery.validator.addMethod("alphanumeric", function(value, element) {
 }, "Use apenas os seguintes caracteres: a-z, A-Z, 0-9.");
 
 
+
+jQuery.validator.addMethod("dataNascimento", function(data) {
+	data = data.replace('/','');
+	data = data.replace('/','');
+	dia = parseInt(data.substr(0,2));
+	mes = parseInt(data.substr(2,2));
+	ano = parseInt(data.substr(4,4));
+	
+	if ((mes > 12 || mes < 1) || (ano > 2013  || ano < 1) || dia < 1)
+		{
+			return false;
+		}
+	
+	if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)
+		{
+			return dia <= 31;
+		}
+	
+	if (mes == 2)
+		{
+			if (ano % 4 == 0)
+				{
+					return dia <= 29;
+				}
+			else
+				return dia <= 28;
+		}
+	
+	return dia <= 30;	
+}, "Data de nascimento inválida.");
+
+
 //Fonte: www.geradordecpf.org
 jQuery.validator.addMethod("cpf", function(valor) {
 	
@@ -84,7 +116,8 @@ $(document).ready(function(){
                 },
                 data_nasc_registrar: {
                 	required: true,
-                	minlength: 10
+                	minlength: 10,
+                	dataNascimento: true
                 }
             },
            
