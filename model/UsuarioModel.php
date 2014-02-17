@@ -13,6 +13,7 @@ class UsuarioModel
 	private $sobrenome;
 	private $email;
 	private $senha;
+	private $dataNascimento;
 	
 	/**
 	 * Retorna os dados de um usuário do banco de dados a partir de seu id.
@@ -24,7 +25,7 @@ class UsuarioModel
 		$sqlSelect = $mysqli->prepare("SELECT * FROM usuarios WHERE id = ?");
 		$sqlSelect->bind_param('i', $id);
 		$sqlSelect->execute();						
-		$sqlSelect->bind_result($this->id, $this->nome, $this->sobrenome, $this->email, $this->senha);
+		$sqlSelect->bind_result($this->id, $this->nome, $this->sobrenome, $this->email, $this->senha, $this->dataNascimento);
 		$sqlSelect->fetch();
 		$sqlSelect->close();
 	}
@@ -37,8 +38,8 @@ class UsuarioModel
 		$senhaBD = hash('sha512', $this->senha);		
 		$mysqli = getConexao();
 		
-		$sqlInserir = $mysqli->prepare("INSERT INTO usuarios(nome, sobrenome, email, senha) VALUES (?, ?, ?, ?)");
-		$sqlInserir->bind_param('ssss', $this->nome, $this->sobrenome, $this->email, $senhaBD);
+		$sqlInserir = $mysqli->prepare("INSERT INTO usuarios(nome, sobrenome, email, senha, data_nascimento) VALUES (?, ?, ?, ?, ?)");
+		$sqlInserir->bind_param('sssss', $this->nome, $this->sobrenome, $this->email, $senhaBD, $this->dataNascimento);
 		
 		if ($sqlInserir->execute())
 		{
@@ -75,7 +76,7 @@ class UsuarioModel
 		if ($sqlLogin->num_rows)
 		{
 			
-			$sqlLogin->bind_result($this->id, $this->nome, $this->sobrenome, $this->email, $this->senha);
+			$sqlLogin->bind_result($this->id, $this->nome, $this->sobrenome, $this->email, $this->senha, $this->dataNascimento);
 			$sqlLogin->fetch();
 				
 			session_start();
@@ -105,13 +106,13 @@ class UsuarioModel
 		if ($senhaMudou == true)
 		{
 			$senhaBD = hash('sha512', $this->senha);
-			$sqlUpdate = $mysqli->prepare("UPDATE usuarios SET nome = ?, sobrenome = ?, email = ?, senha = ? WHERE id = ?");
-			$sqlUpdate->bind_param('ssssi', $this->nome, $this->sobrenome, $this->email, $senhaBD, $this->id);
+			$sqlUpdate = $mysqli->prepare("UPDATE usuarios SET nome = ?, sobrenome = ?, email = ?, senha = ?, data_nascimento = ? WHERE id = ?");
+			$sqlUpdate->bind_param('sssssi', $this->nome, $this->sobrenome, $this->email, $senhaBD, $this->dataNascimento, $this->id);
 		}
 		else 
 		{
-			$sqlUpdate = $mysqli->prepare("UPDATE usuarios SET nome = ?, sobrenome = ?, email = ? WHERE id = ?");
-			$sqlUpdate->bind_param('sssi', $this->nome, $this->sobrenome, $this->email, $this->id);
+			$sqlUpdate = $mysqli->prepare("UPDATE usuarios SET nome = ?, sobrenome = ?, email = ?, data_nascimento = ? WHERE id = ?");
+			$sqlUpdate->bind_param('ssssi', $this->nome, $this->sobrenome, $this->email,  $this->dataNascimento, $this->id);
 		}
 		
 		$sqlUpdate->execute();
@@ -299,5 +300,24 @@ class UsuarioModel
 	public function setSenha($senha)
 	{
 		$this->senha = $senha;
+	}
+	
+	/**
+	 * Retorna a data de nascimento do usuário.
+	 */
+	public function getDataNascimento()
+	{
+		$dataFormatada = date("d/m/Y", strtotime($this->dataNascimento));
+		return $dataFormatada;
+		//return $this->dataNascimento;
+	}
+	
+	/**
+	 * Define a data de nascimento do usuário.
+	 * @param string $senha A data de nascimento do usuário.
+	 */
+	public function setDataNascimento($dataNascimento)
+	{
+		$this->dataNascimento = $dataNascimento;
 	}
 }

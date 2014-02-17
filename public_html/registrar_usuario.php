@@ -15,8 +15,9 @@ if (isset($_SESSION['logado']) && $_SESSION['logado'])
 
 $usuarioController = new UsuariosController(new UsuarioModel());
 
-	if (isset($_POST['nome_registrar']) && isset($_POST['sobrenome_registrar']) 
-		&& isset($_POST['email_registrar']) && isset($_POST['senha_registrar'])) //Meio gambiarra, criar um array.
+	if (isset($_POST['nome_registrar']) && isset($_POST['sobrenome_registrar']) && 
+		isset($_POST['email_registrar']) && isset($_POST['senha_registrar']) && 
+		isset($_POST['data_nasc_registrar'])) 
 	{
 		$usuarioController->registrarUsuarioAction();
 	}

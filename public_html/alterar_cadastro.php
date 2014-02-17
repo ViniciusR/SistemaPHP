@@ -77,7 +77,7 @@ $usuarioController;
 					</div>
 					<div class="input-group">
 						<label for="data_nasc_nova">Data de nascimento</label>
-						<input id="data_nasc_nova" name="data_nasc_nova" placeholder="dd/mm/aaaa" type="text">
+						<input id="data_nasc_nova" name="data_nasc_nova" placeholder="dd/mm/aaaa" value="<?php echo $usuarioModel->getDataNascimento();?>" type="text">
 					</div>
 					<div class="input-group">
 						<label for="cpf_novo">CPF</label>

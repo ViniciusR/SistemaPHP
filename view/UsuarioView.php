@@ -22,6 +22,7 @@ class UsuarioView
 	{
 		echo '<p>Nome completo: '.$this->usuarioModel->getNome()." ".$this->usuarioModel->getsobrenome()."</p>";  
 		echo '<p>E-mail: '.$this->usuarioModel->getEmail()."</p>";
+		echo '<p>Data de nascimento: '.$this->usuarioModel->getDataNascimento()."</p>";
 	}
 	
 	/**

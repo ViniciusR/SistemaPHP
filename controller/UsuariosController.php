@@ -29,6 +29,12 @@ class UsuariosController
 		$this->usuarioModel->setEmail(trim($_POST['email_registrar']));
 		$this->usuarioModel->setSenha(trim($_POST['senha_registrar']));
 		
+		//Trata a data do nascimento para o formato do MySQL.
+		$data = str_replace('/', '-', $_POST['data_nasc_registrar']);
+		$timestamp = strtotime($data);
+		$dataNascimento = date("Y-m-d", $timestamp);
+		$this->usuarioModel->setDataNascimento($dataNascimento);
+		
 		$this->usuarioModel->salvar();
 	}
 	
@@ -52,6 +58,12 @@ class UsuariosController
 		$this->usuarioModel->setNome(trim($_POST['nome_novo']));
 		$this->usuarioModel->setSobrenome(trim($_POST['sobrenome_novo']));
 		$this->usuarioModel->setEmail(trim($_POST['email_novo']));
+		
+		//Trata a data do nascimento para o formato do MySQL.
+		$data = str_replace('/', '-', $_POST['data_nasc_nova']);
+		$timestamp = strtotime($data);
+		$dataNascimento = date("Y-m-d", $timestamp);
+		$this->usuarioModel->setDataNascimento($dataNascimento);
 		
 		if ($senhaMudou == true)
 		{
