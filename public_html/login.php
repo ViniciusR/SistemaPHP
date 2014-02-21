@@ -18,7 +18,7 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<title>Entrar</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Util para telas menores, como smarthones. Possibilita a melhor visualizacao do website em diferetes resolucoes telas.-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Util para telas menores, como smartphones. Possibilita a melhor visualizacao do website em diferetes resolucoes telas.-->
 	<link href="public_html/css/meuestilo.css" rel="stylesheet" media="screen">
 </head>
 

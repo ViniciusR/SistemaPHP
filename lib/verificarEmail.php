@@ -1,7 +1,7 @@
 <?php
 
 /*
- Verifica se um endereco de email ja foi cadastrado ou se e o mesmo antes ao preencher o campo.
+ Verifica se um endereço de email já foi cadastrado ou se é o mesmo antes ao preencher o campo.
 Retorna a resposta (true ou false) ao Javascript (Jquery.validate).
 */
 
@@ -12,19 +12,21 @@ $usuarioController = new UsuariosController(new UsuarioModel());
 $email;
 session_start();
 
+	//Verifica o email no form de alteração de cadastro.
 	if (isset($_SESSION['id']))
 	{
 		if (isset($_POST['email_novo']))
 		{
-			$email = trim($_POST['email_novo']);
+			$email = strtolower(trim($_POST['email_novo']));
 			echo $usuarioController->verificaEmailAction($_SESSION['id'], $email);
 		}
 	}
 	else 
 	{
+		//Verifica o email no form de registrar novo usuário.
 		if (isset($_POST['email']))
 		{
-			$email = trim($_POST['email']);
+			$email = strtolower(trim($_POST['email']));
 			echo $usuarioController->verificaEmailAction(null, $email);
 		}
 	}	

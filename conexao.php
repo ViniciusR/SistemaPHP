@@ -3,7 +3,7 @@ include "config.php";
 
 function getConexao(){
 	// Create connection
-	$mysqli = mysqli_connect(SERVIDOR, BD_USUARIO, BD_SENHA,BD_NOME);
+	$mysqli = mysqli_connect(SERVIDOR, BD_USUARIO, BD_SENHA, BD_NOME);
 	
 	// Check connection
 	if (mysqli_connect_errno())

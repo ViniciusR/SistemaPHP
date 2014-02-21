@@ -26,7 +26,7 @@ class UsuariosController
 	{
 		$this->usuarioModel->setNome(trim($_POST['nome_registrar']));
 		$this->usuarioModel->setSobrenome(trim($_POST['sobrenome_registrar']));
-		$this->usuarioModel->setEmail(trim($_POST['email_registrar']));
+		$this->usuarioModel->setEmail(strtolower(trim($_POST['email_registrar'])));
 		$this->usuarioModel->setSenha(trim($_POST['senha_registrar']));
 		
 		//Trata a data do nascimento para o formato do MySQL.

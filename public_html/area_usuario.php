@@ -14,7 +14,7 @@ require_once ROOT.'/controller/UsuariosController.php';
   
   if (!isset($_SESSION['logado']) || !$_SESSION['logado'])
   {
-  	//redirecionar para pagina de login.
+  	//redirecionar para pagina de login se não estiver logado.
   	header('Location: ..\login');
   }
   
